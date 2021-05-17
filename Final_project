@@ -1,0 +1,69 @@
+import requests
+
+def get_weather(query):
+    api_key = "3cc71d77841875ef6da1278ebf69fbd1"
+
+    #base URL to store weather api url
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    #Store url + api_key and city 
+    complete_url = base_url + "appid=" + api_key + "&q=" + query
+
+    response = request.get(complete_url)
+    return response.json
+
+def test_connection(query):
+    api_key = "3cc71d77841875ef6da1278ebf69fbd1"
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    complete_url = base_url + "appid=" + api_key + "&q=" + query
+
+    response = request.get(complete_url)
+    return response.json
+
+def display_weather(weather,city):
+    
+    #Print weather info
+    print("{}'s temperature: {} degrees celsius".format(city,weather['main']['temp']))
+    print("{}'s Humidity: {} degrees celsius".format(city,weather['main']['humidity']))
+    print("Description: {}".format(weather['weather'][0]['description']))
+    print("{}'s Feels like: {} degrees celsius".format(city,weather['main']['feels_like']))
+    print("Weather: {}".format(weather['weather'][0]['main']))
+
+def main(): 
+    
+    check = 'yes'
+    while check == 'yes':
+    #input city name 
+        city=input("Enter city name: ")
+    print()
+    #try-except block
+    try:
+        query = 'q=' + city
+        w_data = weather_data(query)
+        display_results(w_data,city)
+        connn = test_connection
+        if conn == 200:
+            print("Successful Connection")
+        else:
+            print("Failed Connection")
+
+        print()
+
+        check = input("Input next city. If you wish to discontinue type: 'Stop'")
+        
+    except:
+        print('City name not found')
+    if(check=='Stop'):
+        print('Thanks for coming! Good bye!')
+
+if __name__=='__main__':
+    main()
+
+
+
+
+
+
+
+
+
+
