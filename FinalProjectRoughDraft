@@ -1,0 +1,35 @@
+import requests
+import math
+
+base_url = "http://api.openweathermap.org/data/2.5/weather?"
+api_key = "3cc71d77841875ef6da1278ebf69fbd1"
+
+city_name = input("Enter city name: ")
+
+complete_url = base_url + "appid=" + api_key + "&q=" + city_name
+
+def get_weather(api_key, city):
+
+    response = requests.get(complete_url).json()
+
+    temp = response['main']['temp']
+    temp = math.floor((temp * 1.8) - 459.67)
+
+    feels_like = response['main']['feels_like']
+    feels_like = math.floor((feels_like * 1.8) - 459.67)
+
+    humidity = response['main']['humidity']
+
+    print(temp)
+    print(feels_like)
+    print(humidity)
+    
+get_weather(api_key, city_name) 
+
+
+
+
+
+
+
+
